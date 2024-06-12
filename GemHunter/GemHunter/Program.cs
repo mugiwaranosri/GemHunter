@@ -75,6 +75,7 @@ class Player
         {
             grid = new Cell[6, 6];
             InitializeGrid();
+        PlacePlayers();
         }
 
         private void InitializeGrid()
@@ -87,8 +88,13 @@ class Player
                 }
             }
         }
+        private void PlacePlayers()
+        {
+        grid[0, 0].Occupant = "P1";
+        grid[5, 5].Occupant = "P2";
+        }
 
-        public void Display()
+    public void Display()
         {
             for (int i = 0; i < 6; i++)
             {
