@@ -33,5 +33,36 @@ namespace GemHunters
             Occupant = occupant;
         }
     }
+class Player
+{
+    public string Name { get; }
+    public Position Position { get; set; }
+    public int GemCount { get; set; }
 
+    public Player(string name, Position startPosition)
+    {
+        Name = name;
+        Position = startPosition;
+        GemCount = 0;
+    }
+
+    public void Move(char direction)
+    {
+        switch (direction)
+        {
+            case 'U':
+                Position.Y -= 1;
+                break;
+            case 'D':
+                Position.Y += 1;
+                break;
+            case 'L':
+                Position.X -= 1;
+                break;
+            case 'R':
+                Position.X += 1;
+                break;
+        }
+    }
+}
 

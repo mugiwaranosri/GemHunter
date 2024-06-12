@@ -1,0 +1,15 @@
+C:\projects\GemHunter\GemHunter\GemHunter\bin\Debug\net8.0\GemHunter.exe
+C:\projects\GemHunter\GemHunter\GemHunter\bin\Debug\net8.0\GemHunter.deps.json
+C:\projects\GemHunter\GemHunter\GemHunter\bin\Debug\net8.0\GemHunter.runtimeconfig.json
+C:\projects\GemHunter\GemHunter\GemHunter\bin\Debug\net8.0\GemHunter.dll
+C:\projects\GemHunter\GemHunter\GemHunter\bin\Debug\net8.0\GemHunter.pdb
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\GemHunter.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\GemHunter.AssemblyInfoInputs.cache
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\GemHunter.AssemblyInfo.cs
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\GemHunter.csproj.CoreCompileInputs.cache
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\GemHunter.sourcelink.json
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\GemHunter.dll
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\refint\GemHunter.dll
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\GemHunter.pdb
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\GemHunter.genruntimeconfig.cache
+C:\projects\GemHunter\GemHunter\GemHunter\obj\Debug\net8.0\ref\GemHunter.dll
