@@ -66,3 +66,39 @@ class Player
     }
 }
 
+
+    class Board
+    {
+        private Cell[,] grid;
+
+        public Board()
+        {
+            grid = new Cell[6, 6];
+            InitializeGrid();
+        }
+
+        private void InitializeGrid()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    grid[i, j] = new Cell();
+                }
+            }
+        }
+
+        public void Display()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    Console.Write(grid[i, j].Occupant + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+
+
