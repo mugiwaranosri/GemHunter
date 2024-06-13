@@ -106,8 +106,6 @@ class Player
         }
         private Random randomizer = new Random();
 
-    // Other methods...
-
         private void PlaceObstacles(int count)
         {
                int placed = 0;
@@ -139,7 +137,61 @@ class Player
                   }
              }
         }
-    }
+        public bool IsValidMove(Player player, char direction)
+        {
+                  int newX = player.Position.X;
+                  int newY = player.Position.Y;
 
+                  switch (direction)
+                  {
+            case 'U':
+                newX -= 1;
+                break;
+            case 'D':
+                newX += 1;
+                break;
+            case 'L':
+                newY -= 1;
+                break;
+            case 'R':
+                newY += 1;
+                break;
+            default:
+                return false;
+        }
+
+        if (newX < 0 || newX >= 6 || newY < 0 || newY >= 6)
+        {
+            return false;
+        }
+
+        if (Grid[newX, newY].Occupant == "O")
+        {
+            return false;
+        }
+
+        return true;
+    }
+}
+
+    
+class Game
+{
+    private Board Board { get; set; }
+    private Player Player1 { get; set; }
+    private Player Player2 { get; set; }
+    private Player CurrentTurn { get; set; }
+    private int TotalTurns { get; set; }
+
+    public Game()
+    {
+        Board = new Board();
+        Player1 = new Player("P1", new Position(0, 0));
+        Player2 = new Player("P2", new Position(5, 5));
+        Board.PlacePlayers(Player1, Player2);
+        CurrentTurn = Player1;
+        TotalTurns = 0;
+    }
+}
 
 
