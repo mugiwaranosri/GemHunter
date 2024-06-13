@@ -28,9 +28,9 @@ namespace GemHunters
     {
         public string Occupant { get; set; }
 
-        public Cell(string occupant = "-")
+        public Cell()
         {
-            Occupant = occupant;
+            Occupant = "_";
         }
     }
 class Player
@@ -51,16 +51,16 @@ class Player
         switch (direction)
         {
             case 'U':
-                Position.Y -= 1;
-                break;
-            case 'D':
-                Position.Y += 1;
-                break;
-            case 'L':
                 Position.X -= 1;
                 break;
-            case 'R':
+            case 'D':
                 Position.X += 1;
+                break;
+            case 'L':
+                Position.Y -= 1;
+                break;
+            case 'R':
+                Position.Y += 1;
                 break;
         }
     }
@@ -69,13 +69,13 @@ class Player
 
     class Board
     {
-        private Cell[,] grid;
+        private Cell[,] Grid;
 
         public Board()
         {
-            grid = new Cell[6, 6];
+            Grid = new Cell[6, 6];
             InitializeGrid();
-        PlacePlayers();
+            PlacePlayers();
         }
 
         private void InitializeGrid()
@@ -84,27 +84,62 @@ class Player
             {
                 for (int j = 0; j < 6; j++)
                 {
-                    grid[i, j] = new Cell();
+                    Grid[i, j] = new Cell();
                 }
             }
         }
-        private void PlacePlayers()
+        public void PlacePlayers(Player p1, Player p2)
         {
-        grid[0, 0].Occupant = "P1";
-        grid[5, 5].Occupant = "P2";
+            Grid[p1.Position.X, p1.Position.Y].Occupant = "P1";
+            Grid[p2.Position.X, p2.Position.Y].Occupant = "P2";
         }
-
-    public void Display()
+        public void Display()
         {
             for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < 6; j++)
                 {
-                    Console.Write(grid[i, j].Occupant + " ");
+                    Console.Write(Grid[i, j].Occupant + " ");
                 }
                 Console.WriteLine();
             }
         }
+        private Random randomizer = new Random();
+
+    // Other methods...
+
+        private void PlaceObstacles(int count)
+        {
+               int placed = 0;
+               while (placed < count)
+               {
+                   int x = randomizer.Next(6);
+                   int y = randomizer.Next(6);
+
+                   if (Grid[x, y].Occupant == "-")
+                   {
+                       Grid[x, y].Occupant = "O";
+                       placed++;
+                   }
+               }
+        }
+
+        private void PlaceGems(int count)
+        {
+             int placed = 0;
+             while (placed < count)
+             {
+                  int x = randomizer.Next(6);
+                  int y = randomizer.Next(6);
+
+                  if (Grid[x, y].Occupant == "-")
+                  {
+                      Grid[x, y].Occupant = "G";
+                      placed++;
+                  }
+             }
+        }
     }
+
 
 
