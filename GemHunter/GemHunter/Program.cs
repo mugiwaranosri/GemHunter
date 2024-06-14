@@ -226,9 +226,10 @@ class Player
     }
     public void DisplayHeader()
     {
-        Console.WriteLine("*******************************************************************************");
-        Console.WriteLine("*                                 Welcome to Gem Hunters!                     *");
-        Console.WriteLine("*******************************************************************************");
+        Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════════╗");
+        Console.WriteLine("║                           Welcome to Gem Hunters!                            ║");
+        Console.WriteLine("╚══════════════════════════════════════════════════════════════════════════════╝");
+
     }
 
     public void DisplayFooter()
