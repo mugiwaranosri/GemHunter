@@ -19,7 +19,7 @@ namespace GemHunters
     // Player Class
     class Player
     {
-        public string Name { get; set; }
+        public string Name { get; }
         public Position Position { get; set; }
         public int GemCount { get; set; }
 
@@ -203,8 +203,11 @@ namespace GemHunters
                 if (!Grid.Cast<Cell>().Any(cell => cell.Occupant == "G"))
                 {
                     Console.WriteLine("All gems collected! Game over!");
+                
                     Environment.Exit(0);
+                    
                 }
+
             }
         }
     }
@@ -248,6 +251,10 @@ namespace GemHunters
                     Console.WriteLine("Invalid move! Try again.");
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
+                }
+                if (IsGameOver())
+                {
+                    break;
                 }
             }
 
@@ -320,4 +327,3 @@ namespace GemHunters
         }
     }
 }
-
