@@ -207,14 +207,9 @@ class Player
     public void Display(Player player1, Player player2, int totalMoves)
     {
         Console.Clear();
-       
-        Console.WriteLine("Welcome to Gem Hunters!");
-       
-        Console.WriteLine("Move using U (up), D (down), L (left), R (right).");
-        Console.WriteLine("Avoid obstacles (O) and collect gems (G).");
-      
-        Console.WriteLine($"{player1.Name} gems: {player1.GemCount}");
-        Console.WriteLine($"{player2.Name} gems: {player2.GemCount}");
+        DisplayHeader();
+        DisplayInstructions();
+        DisplayStats(player1, player2, totalMoves);
         Console.WriteLine();
 
         for (int i = 0; i < 6; i++)
@@ -225,10 +220,38 @@ class Player
             }
             Console.WriteLine();
         }
+        DisplayFooter();
 
         
     }
+    public void DisplayHeader()
+    {
+        Console.WriteLine("*******************************************************************************");
+        Console.WriteLine("*                                 Welcome to Gem Hunters!                     *");
+        Console.WriteLine("*******************************************************************************");
+    }
+
+    public void DisplayFooter()
+    {
+        Console.WriteLine("*******************************************************************************");
+    }
+
+    public void DisplayInstructions()
+    {
+        Console.WriteLine("Players compete to collect the most gems.");
+        Console.WriteLine("Move using U (up), D (down), L (left), R (right).");
+        Console.WriteLine("Avoid obstacles (O) and collect gems (G).");
+        Console.WriteLine("Good luck!");
+    }
+
+    public void DisplayStats(Player player1, Player player2, int totalMoves)
+    {
+        Console.WriteLine($"Total Moves: {totalMoves}");
+        Console.WriteLine($"{player1.Name} gems: {player1.GemCount}");
+        Console.WriteLine($"{player2.Name} gems: {player2.GemCount}");
+    }
 }
+
     
 class Game
 {
