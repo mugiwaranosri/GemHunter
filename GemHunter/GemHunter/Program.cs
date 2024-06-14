@@ -75,7 +75,7 @@ class Player
         {
             Grid = new Cell[6, 6];
             InitializeGrid();
-            PlacePlayers();
+           
         }
 
         private void InitializeGrid()
@@ -192,6 +192,46 @@ class Game
         CurrentTurn = Player1;
         TotalTurns = 0;
     }
+    public void Start()
+    {
+        while (TotalTurns < 30)
+        {
+            Board.Display();
+            Console.WriteLine($"{CurrentTurn.Name}'s turn (U, D, L, R): ");
+            char move = Console.ReadKey().KeyChar;
+            if (Board.IsValidMove(CurrentTurn, move))
+            {
+                CurrentTurn.Move(move);
+                TotalTurns++;
+                SwitchTurn();
+            }
+        }
+
+        Board.Display();
+        AnnounceWinner();
+    }
+
+    private void SwitchTurn()
+    {
+        CurrentTurn = (CurrentTurn == Player1) ? Player2 : Player1;
+    }
+
+    private void AnnounceWinner()
+    {
+        if (Player1.GemCount > Player2.GemCount)
+        {
+            Console.WriteLine($"{Player1.Name} wins!");
+        }
+        else if (Player2.GemCount > Player1.GemCount)
+        {
+            Console.WriteLine($"{Player2.Name} wins!");
+        }
+        else
+        {
+            Console.WriteLine("It's a tie!");
+        }
+    }
 }
+    
 
 
