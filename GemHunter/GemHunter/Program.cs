@@ -172,6 +172,38 @@ class Player
 
         return true;
     }
+    public void MovePlayer(Player player, char direction)
+    {
+        int newX = player.Position.X;
+        int newY = player.Position.Y;
+
+        switch (direction)
+        {
+            case 'U':
+                newX -= 1;
+                break;
+            case 'D':
+                newX += 1;
+                break;
+            case 'L':
+                newY -= 1;
+                break;
+            case 'R':
+                newY += 1;
+                break;
+        }
+
+        if (Grid[newX, newY].Occupant == "G")
+        {
+            player.GemCount++;
+            Grid[newX, newY].Occupant = "-";
+        }
+
+        Grid[player.Position.X, player.Position.Y].Occupant = "-";
+        player.Position.X = newX;
+        player.Position.Y = newY;
+        Grid[player.Position.X, player.Position.Y].Occupant = player.Name == "P1" ? "P1" : "P2";
+    }
 }
 
     
