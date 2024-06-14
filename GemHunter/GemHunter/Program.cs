@@ -93,16 +93,40 @@ class Player
             Grid[p1.Position.X, p1.Position.Y].Occupant = "P1";
             Grid[p2.Position.X, p2.Position.Y].Occupant = "P2";
         }
-        public void Display()
+        public void Display(Player player1, Player player2, int totalMoves)
         {
+            Console.Clear();
+            DisplayHeader();
+            DisplayInstructions();
+            DisplayStats(player1, player2, totalMoves);
+            Console.WriteLine();
             for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < 6; j++)
                 {
-                    Console.Write(Grid[i, j].Occupant + " ");
-                }
+                  switch (Grid[i, j].Occupant)
+                  {
+                    case "P1":
+                        Console.Write(" P1 ");
+                        break;
+                    case "P2":
+                        Console.Write(" P2 ");
+                        break;
+                    case "G":
+                        Console.Write(" 🌟 ");
+                        break;
+                    case "O":
+                        Console.Write(" O ");
+                        break;
+                    default:
+                        Console.Write(" - ");
+                        break;
+                  }
+            }
                 Console.WriteLine();
             }
+
+        DisplayFooter();
         }
         private Random randomizer = new Random();
 
@@ -278,35 +302,46 @@ class Game
         Console.Write("Enter name for Player 2: ");
         Player2.Name = Console.ReadLine();
 
-        while (TotalTurns < 30)
+        do
         {
-            Board.Display(Player1, Player2, TotalTurns);
-            Console.WriteLine($"{CurrentTurn.Name}'s turn (U, D, L, R): ");
-            char move = Console.ReadKey().KeyChar;
-            if(move =='U' || move == 'D' || move == 'L' || move == 'R')
-            { 
+            TotalTurns = 0;
+            Player1.GemCount = 0;
+            Player2.GemCount = 0;
+            Board = new Board();
+            Board.PlacePlayers(Player1, Player2);
+            CurrentTurn = Player1;
 
-               if (Board.IsValidMove(CurrentTurn, move))
-               {
-                  Board.MovePlayer(CurrentTurn, move);
-                  TotalTurns++;
-                  SwitchTurn();
-               }
-               else
+            while (TotalTurns < 30)
+            {
+                Board.Display(Player1, Player2, TotalTurns);
+                Console.WriteLine($"{CurrentTurn.Name}'s turn (U, D, L, R): ");
+                char move = Console.ReadKey().KeyChar;
+                if (move == 'U' || move == 'D' || move == 'L' || move == 'R')
                 {
-                    Console.WriteLine("Invalid move. Try again.");
+
+                    if (Board.IsValidMove(CurrentTurn, move))
+                    {
+                        Board.MovePlayer(CurrentTurn, move);
+                        TotalTurns++;
+                        SwitchTurn();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid move. Try again.");
+                        Console.ReadKey(true);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Use U, D, L, R to move.");
                     Console.ReadKey(true);
                 }
             }
-            else
-            {
-                Console.WriteLine("Invalid input. Use U, D, L, R to move.");
-                Console.ReadKey(true);
-            }
-        }
 
-        Board.Display(Player1, Player2, TotalTurns);
-        AnnounceWinner();
+            Board.Display(Player1, Player2, TotalTurns);
+            AnnounceWinner();
+            Console.WriteLine("Do you want to play again? (Y/N): ");
+        } while (Console.ReadKey().KeyChar == 'Y');
     }
 
     private void SwitchTurn()
