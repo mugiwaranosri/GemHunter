@@ -204,8 +204,31 @@ class Player
         player.Position.Y = newY;
         Grid[player.Position.X, player.Position.Y].Occupant = player.Name == "P1" ? "P1" : "P2";
     }
-}
+    public void Display(Player player1, Player player2, int totalMoves)
+    {
+        Console.Clear();
+       
+        Console.WriteLine("Welcome to Gem Hunters!");
+       
+        Console.WriteLine("Move using U (up), D (down), L (left), R (right).");
+        Console.WriteLine("Avoid obstacles (O) and collect gems (G).");
+      
+        Console.WriteLine($"{player1.Name} gems: {player1.GemCount}");
+        Console.WriteLine($"{player2.Name} gems: {player2.GemCount}");
+        Console.WriteLine();
 
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                Console.Write(Grid[i, j].Occupant + " ");
+            }
+            Console.WriteLine();
+        }
+
+        
+    }
+}
     
 class Game
 {
