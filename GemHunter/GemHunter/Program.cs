@@ -252,10 +252,7 @@ namespace GemHunters
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                 }
-                if (IsGameOver())
-                {
-                    break;
-                }
+             
             }
 
             AnnounceWinner();
