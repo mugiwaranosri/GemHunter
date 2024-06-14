@@ -35,7 +35,7 @@ namespace GemHunters
     }
 class Player
 {
-    public string Name { get; }
+    public string Name { get; set; }
     public Position Position { get; set; }
     public int GemCount { get; set; }
 
@@ -249,20 +249,39 @@ class Game
     }
     public void Start()
     {
+        Console.Write("Enter name for Player 1: ");
+        Player1.Name = Console.ReadLine();
+        Console.Write("Enter name for Player 2: ");
+        Player2.Name = Console.ReadLine();
+
         while (TotalTurns < 30)
         {
-            Board.Display();
+            Board.Display(Player1, Player2, TotalTurns);
             Console.WriteLine($"{CurrentTurn.Name}'s turn (U, D, L, R): ");
             char move = Console.ReadKey().KeyChar;
-            if (Board.IsValidMove(CurrentTurn, move))
+            if(move =='U' || move == 'D' || move == 'L' || move == 'R')
+            { 
+
+               if (Board.IsValidMove(CurrentTurn, move))
+               {
+                  Board.MovePlayer(CurrentTurn, move);
+                  TotalTurns++;
+                  SwitchTurn();
+               }
+               else
+                {
+                    Console.WriteLine("Invalid move. Try again.");
+                    Console.ReadKey(true);
+                }
+            }
+            else
             {
-                CurrentTurn.Move(move);
-                TotalTurns++;
-                SwitchTurn();
+                Console.WriteLine("Invalid input. Use U, D, L, R to move.");
+                Console.ReadKey(true);
             }
         }
 
-        Board.Display();
+        Board.Display(Player1, Player2, TotalTurns);
         AnnounceWinner();
     }
 
@@ -286,6 +305,7 @@ class Game
             Console.WriteLine("It's a tie!");
         }
     }
+
 }
     
 
