@@ -130,17 +130,22 @@ namespace GemHunters
             Console.WriteLine("Good luck!\n");
 
             Console.WriteLine($"Total Moves: {totalMoves}");
-            Console.WriteLine($"Player1 (P1) gems: {player1.GemCount}");
-            Console.WriteLine($"Player2 (P2) gems: {player2.GemCount}\n");
+            Console.WriteLine($"{player1.Name} (P1) gems: {player1.GemCount}");
+            Console.WriteLine($"{player2.Name} (P2) gems: {player2.GemCount}\n");
 
-            Console.WriteLine("╔════════════════════════════════╗");
+            Console.WriteLine("╔══════════════╗");
 
             for (int i = 0; i < 6; i++)
             {
-                Console.Write("║ ");
+                Console.Write("║");
                 for (int j = 0; j < 6; j++)
                 {
-                    if (player1.Position.X == i && player1.Position.Y == j)
+                    if (player1.Position.X == i && player1.Position.Y == j && player2.Position.X == i && player2.Position.Y == j)
+                    {
+                        Console.Write("P1P2 ");
+                    }
+
+                    else if(player1.Position.X == i && player1.Position.Y == j)
                     {
                         Console.Write("P1 ");
                     }
@@ -153,10 +158,10 @@ namespace GemHunters
                         Console.Write(Grid[i, j].Occupant + " ");
                     }
                 }
-                Console.WriteLine("║");
+                Console.WriteLine(" ║");
             }
 
-            Console.WriteLine("╚════════════════════════════════════════════════╝");
+            Console.WriteLine("╚══════════════╝");
         }
 
         public bool IsValidMove(Player player, char direction)
@@ -198,16 +203,6 @@ namespace GemHunters
             {
                 player.GemCount += 1;
                 Grid[player.Position.X, player.Position.Y].Occupant = "-";
-
-                // Check if all gems are collected
-                if (!Grid.Cast<Cell>().Any(cell => cell.Occupant == "G"))
-                {
-                    Console.WriteLine("All gems collected! Game over!");
-                
-                    Environment.Exit(0);
-                    
-                }
-
             }
         }
     }
@@ -224,10 +219,20 @@ namespace GemHunters
         public Game()
         {
             Board = new Board();
-            Player1 = new Player("P1", new Position(0, 0));
-            Player2 = new Player("P2", new Position(5, 5));
+            InitializePlayers();
             CurrentTurn = Player1;
             TotalMoves = 0;
+        }
+
+        public void InitializePlayers()
+        {
+            Console.Write("Enter name for Player 1 (P1): ");
+            string player1Name = Console.ReadLine();
+            Player1 = new Player(player1Name, new Position(0, 0));
+
+            Console.Write("Enter name for Player 2 (P2): ");
+            string player2Name = Console.ReadLine();
+            Player2 = new Player(player2Name, new Position(5, 5));
         }
 
         public void Start()
@@ -252,7 +257,6 @@ namespace GemHunters
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                 }
-             
             }
 
             AnnounceWinner();
@@ -277,11 +281,11 @@ namespace GemHunters
 
             if (Player1.GemCount > Player2.GemCount)
             {
-                Console.WriteLine("Player1 (P1) wins!");
+                Console.WriteLine($"{Player1.Name} (P1) wins!");
             }
             else if (Player2.GemCount > Player1.GemCount)
             {
-                Console.WriteLine("Player2 (P2) wins!");
+                Console.WriteLine($"{Player2.Name} (P2) wins!");
             }
             else
             {
@@ -307,8 +311,7 @@ namespace GemHunters
         public void ResetGame()
         {
             Board = new Board();
-            Player1 = new Player("P1", new Position(0, 0));
-            Player2 = new Player("P2", new Position(5, 5));
+            InitializePlayers();
             CurrentTurn = Player1;
             TotalMoves = 0;
         }
